@@ -1,38 +1,177 @@
-.App {
+@import url('https://fonts.googleapis.com/css2?family=Marck+Script&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+input {
+  border-radius: 6px;
+  height: 40px;
+}
+
+.mainPage {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+}
+
+.frontPage {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+}
+
+.button {
+  padding: 1em;
+  margin: 1em;
+  border-radius: 6px;
+  border: 0;
+}
+
+h1, h3, label {
+  color: #fff;
+}
+
+/* h1 {
+  font-size: 3em;
+  font-family: 'Marck Script', cursive;
+} */
+
+@media only screen and (max-width: 1500px) {
+  h1 {
+    font-size: 1.8em;
+  }
+}
+@media only screen and (max-width: 800px) {
+  h1 {
+    font-size: 1.3em;
+  }
+}
+
+h2{
+  padding: 1em;
+}
+
+
+
+a:visited, a:link, a:active {
+  text-decoration: none;
+  color: darkcyan;
+}
+
+a:hover {
+  text-shadow: 0 0 10px #fff;
+  color: darkcyan !important;
+
+}
+
+ul, li {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  color: #fff;
+}
+
+.feed {
+  background-color: black;
+  height: 100%;
+  width: 100vw;
+  display: grid;
+  grid-template-columns: 20% 40% 36%;
+  grid-gap: 1em;
+  overflow-x: hidden;
+}
+
+.feed h1, h2 {
+  color: #fff;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.successOrFail {
+  background-color:orange;
+  color:#FFF;
+
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.row {
+  /* display: flex; */
+  /* height: 100vh; */
+  flex-direction: column;
+  justify-content: center;
+  /* overflow-y: scroll; */
+  /* overflow-x: hidden; */
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.post {
+  width: 100%;
+  /* max-height: 35%; */
+  background-color: darkcyan;
+  border-radius: 10px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+justify-content: center;
+align-items: center;
+  /* padding: 1em;
+  margin: 1em; */
+  text-align: center;
 }
 
-.App-link {
-  color: #61dafb;
+.track {
+  width: 100%;
+  /* height: 33%; */
+  display: flex;
+  flex-direction: column;
+justify-content: center;
+align-items: center;
+  background-color: lightcoral;
+  border-radius: 10px;
+  /* padding: 1em;
+  margin: 1em; */
+  text-align: center;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.modal{
+  display:none;
+  top: 0;
+  min-width: 250px;
+  width: 80%;
+  height: 400px;
+  margin: 0 auto;
+  position: fixed;
+  z-index: 40001;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px #000;
+  margin-top: 30px;
+  margin-left: 10%;
+
+  animation-name: fadeIn_Modal;
+  animation-duration: 0.8s;
+ 
+}
+
+.modalContainer{
+  display: none;
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  opacity: 0.9;
+  background: #222;
+  z-index: 40000;
+  top:0;
+  left: 0;
+  overflow: hidden;
+
+  animation-name: fadeIn_Container;
+  animation-duration: 1s;
+  
 }
