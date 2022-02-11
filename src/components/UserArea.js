@@ -1,31 +1,32 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {Navbar, Nav, Container, NavDropdown, Col} from 'react-bootstrap';
 import UserContext from '../context/UserContext';
 import {Link} from 'react-router-dom'
-const UserArea = () => {
-  const {user, setUser} = useContext(UserContext);
+const UserArea = ({currentPage}) => {
+  const {user, setUser, loggedIn} = useContext(UserContext);
 
   const clearUser = () => {
     setUser(null);
   }
   return (
-<Col lg={12}>
-  <Navbar bg="dark" variant="dark" expand="lg" className="mt-3">
+<Col lg={12} className="mb-5">
+  <Navbar variant="dark" expand="lg" fixed="top" className="pt-3" style={{backgroundColor: '#111'}}>
   <Container>
     <Navbar.Brand href={`/feed/`}>vegasMusicSocial</Navbar.Brand>
     <Navbar.Toggle aria-controls="basic-navbar-nav" />
     <Navbar.Collapse id="basic-navbar-nav">
       <Nav className="ms-auto">
-      <NavDropdown title="Add" id="navScrollingDropdown">
-        <Link to={`/addPost/`} style={{padding: '0 1em'}}>Add Post</Link><br />
-        <Link to={`/addTrack/`} style={{padding: '0 1em'}}>Add Track</Link><br />
+      {/* <Link to='/feed'>Feed</Link> */}
+        <Link to={`/users/${user.user_id}`}>Profile</Link>
+        <Link to={`/upcomingShows/`}>Upcoming Shows</Link>
+        <NavDropdown title="Add" id="nav-dropdown" className="dropdown-toggle nav-align">
+        <NavDropdown.Item><Link to={`/addPost/`}>Post</Link></NavDropdown.Item>
+        <NavDropdown.Item><Link to={`/addTrack/`}>Track</Link></NavDropdown.Item>
+        <NavDropdown.Item><Link to={`/addVideo/`}>Video</Link></NavDropdown.Item>
         </NavDropdown>
-        <Link to={`/users/${user.user_id}`} style={{padding: '0 1em'}}>Profile</Link>
-        <Link to={`/upcomingShows/`} style={{padding: '0 1em'}}>Upcoming Shows</Link>
-
         
-        <Link onClick={clearUser} to={`/`}  style={{padding: '0 1em'}}>Sign Out</Link>
-
+        <Link className="nav-align" onClick={clearUser} to={`/`}>Sign Out</Link>
+  
       </Nav>
     </Navbar.Collapse>
   </Container>

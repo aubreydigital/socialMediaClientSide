@@ -1,11 +1,13 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useContext} from 'react';
+import UserContext from '../context/UserContext';
 import {Link, useParams} from 'react-router-dom'
-const UpcomingShows = () => {
+const ShowsArea = () => {
     const [shows,setShows] = useState([])
+    const {WEB_API} = useContext(UserContext);
    const params = useParams();
 
     const fetchShowData = async () => {
-        const res = await fetch('http://localhost:8888/social_media/server/api/shows/read.php');
+        const res = await fetch(`${WEB_API}/api/shows/read.php`);
         const data = res.json();
         return data;
       }
@@ -21,9 +23,9 @@ const UpcomingShows = () => {
 
   return <div className='frontPage bg-dark'>
       <h1>Upcoming Shows</h1>
-      {shows && shows.map((show, i) => (
+      {shows && shows.map(show => (
           <>
-  <img key={i} style={{maxWidth: '300px', borderRadius: '10px', boxShadow: '0 0 10px #fff', margin: '1em 0'}} src={`http://localhost:8888/social_media/server/uploads/flyers/${show.flyer}`} />
+  <img style={{maxWidth: '300px', borderRadius: '10px', boxShadow: '0 0 10px #fff', margin: '1em 0'}} src={`${WEB_API}/uploads/flyers/${show.flyer}`} />
   <ul>
       <li>Artists: {show.artists}</li>
       <li>Venue: {show.venue}</li>
@@ -39,4 +41,4 @@ const UpcomingShows = () => {
   </div>;
 };
 
-export default UpcomingShows;
+export default ShowsArea;

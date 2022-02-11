@@ -2,6 +2,7 @@ import Form from 'react-bootstrap/Form';
 import {Row, Col} from 'react-bootstrap';
 import { useState, useContext, useRef} from 'react';
 import UploadTrack from '../components/UploadTrack';
+import UploadImage from '../components/UploadImage';
 import UserContext from '../context/UserContext';
 import { useNavigate } from 'react-router-dom'
 
@@ -9,15 +10,18 @@ const AddTrack = () => {
   const [selectedTrack, setSelectedTrack] = useState(null);
   const [trackName, setTrackName] = useState('');  
   const [track, setTrack] = useState(null);
-  const {user} = useContext(UserContext);
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [imageName, setImageName] = useState('');  
+  const [image, setImage] = useState(null);
+  const {user, WEB_API} = useContext(UserContext);
   const nav = useNavigate();
 
   const onSubmit = async (e) => {
       e.preventDefault();
-      let newTrack = { artist_name: user.artist_name, track_name: trackName, file_name: `http://localhost:8888/social_media/server/uploads/${track}`}
+      let newTrack = { artist_name: user.artist_name, track_name: trackName, file_name: `http://localhost:8888/social_media/server/uploads/tracks/${track}`, image: `http://localhost:8888/social_media/server/uploads/tracks/images/${image}`}
         console.log(newTrack);
         try {
-          await fetch('http://localhost:8888/social_media/server/api/tracks/create.php', {
+          await fetch(`http://localhost:8888/social_media/server/api/tracks/create.php`, {
           method: 'POST',
           mode: 'no-cors',
           headers: {
@@ -38,13 +42,14 @@ const AddTrack = () => {
   return (
     <>
     
-    <div className="container text-center">
+    <div className="container text-center frontPage">
     <div className="row mt-5">
       <div className="col">
 
       </div>
       </div>
       <UploadTrack track={track} setTrack={setTrack} selectedTrack={selectedTrack} setSelectedTrack={setSelectedTrack}/>
+      <UploadImage image={image} setImage={setImage} selectedImage={selectedImage} setSelectedImage={setSelectedImage}/>
       <Form onSubmit={onSubmit} className='mt-5'>
         <Form.Group controlId='trackName'>
       <Row className="my-5">

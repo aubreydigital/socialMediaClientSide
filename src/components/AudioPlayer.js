@@ -112,7 +112,7 @@ let noMoError = currentTime
       <Row style={{ textAlign:'center', alignItems: 'center', justifyContent: 'center' }}>
           {/* <Col xs={1}><FaBackward style={{ cursor: 'pointer', color: 'rgba(200, 200, 0, 0.3)'}} onClick={handleLastSong} /></Col> */}
           <Col xs={5}>
-      <audio ref={audioPlayer} src={song} preload="metadata"></audio>
+      <audio ref={audioPlayer} src={song} preload="auto"></audio>
       {/* <button  onClick={backThirty}><BsArrowLeftShort /> 30</button> */}
       <h4 style={{ color: 'rgba(255, 255, 255, 1)', padding: '5px', borderRadius: '6px', backgroundColor: 'rgba(255,255,255, .2)', fontFamily: 'sans-serif', textWrap: 'nowrap', fontSize: '1em'}}>{songText}</h4>
     

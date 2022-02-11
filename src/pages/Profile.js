@@ -7,7 +7,7 @@ import UserContext from '../context/UserContext';
 
 const Profile = () => {
   const {user} = useContext(UserContext);
-
+ 
   return <div className="frontPage">
     <h1>Profile</h1><br />
     <ul>

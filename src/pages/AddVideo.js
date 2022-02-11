@@ -9,7 +9,7 @@ const AddVideo = () => {
   const [selectedVideo, setSelectedVideo] = useState(null);
   const [videoName, setVideoName] = useState('');  
   const [video, setVideo] = useState(null);
-  const {user} = useContext(UserContext);
+  const {user, WEB_API, getVideos} = useContext(UserContext);
   const nav = useNavigate();
 
   const onSubmit = async (e) => {
@@ -18,6 +18,7 @@ const AddVideo = () => {
         console.log(newVideo);
         try {
           await fetch('http://localhost:8888/social_media/server/api/videos/create.php', {
+            // await fetch(`${WEB_API}/api/videos/create.php`, {
           method: 'POST',
           mode: 'no-cors',
           headers: {
@@ -26,6 +27,7 @@ const AddVideo = () => {
           body: JSON.stringify(newVideo)
           });
           nav('/feed');
+          getVideos();
         } catch (err) {
           console.log(video.name);
         }
@@ -38,8 +40,8 @@ const AddVideo = () => {
   return (
     <>
     
-    <div className="container text-center">
-    <div className="row mt-5">
+    <div className="frontPage container text-center">
+    <div className="row">
       <div className="col">
       </div>
       </div>

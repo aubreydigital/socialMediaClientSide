@@ -19,24 +19,48 @@ export const UserProvider = ({ children}) => {
   //track state
   const [artistName, setArtistName] = useState('')
   const [trackName, setTrackName] = useState('')
-
+  // const WEB_API = 'https://aubrey.digital/vms_server/server';
+  const WEB_API = 'http://localhost:8888/social_media/server';
     const { width } = useWindowSize();
 
     let nav = useNavigate();
     const fetchData = async () => {
-      const res = await fetch('http://localhost:8888/social_media/server/api/users/');
+      // const res = await fetch('http://localhost:8888/social_media/server/api/users/');
+      // const res = await fetch(`${LOCAL_API}/api/users/`);
+      const res = await fetch(`${WEB_API}/api/users/`);
       const data = res.json();
       return data;
     }
-  
+
+  const onLike = async (e) => {
+      e.preventDefault();
+      let updatedUser = { post_id: post.post_id, title: post.title, post: post.post, likes: post.likes };
+      console.log(updatedUser);
+      try {
+          await fetch('http://localhost:8888/social_media/server/api/posts/update.php', {
+              method: 'PUT',
+              headers: {
+                  'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(updatedUser)
+          });
+           
+          getPosts();
+      } catch (err) {
+          console.error('User could not be updated');
+      }
+      
+    };
+
     const onLogin = async (e) => {
         e.preventDefault();
         let loginUser = { user_email: email, user_password: password };
         try {
             await fetch('http://localhost:8888/social_media/server/api/users/login.php', {
+            // await fetch(`${WEB_API}/api/users/login.php`, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(loginUser)
             }).then(response => {
@@ -62,32 +86,43 @@ export const UserProvider = ({ children}) => {
 
       const [posts, setPosts] = useState([])
     const fetchPostData = async () => {
-        const res = await fetch('http://localhost:8888/social_media/server/api/posts/read.php');
+        // const res = await fetch('http://localhost:8888/social_media/server/api/posts/read.php');
+        const res = await fetch(`${WEB_API}/api/posts/read.php`);
         const data = res.json();
         return data;
       }
 
       const [tracks, setTracks] = useState([])
       const fetchTrackData = async () => {
-          const res = await fetch('http://localhost:8888/social_media/server/api/tracks/read.php');
+          // const res = await fetch('http://localhost:8888/social_media/server/api/tracks/read.php');
+          const res = await fetch(`${WEB_API}/api/tracks/read.php`);
           const data = res.json();
           return data;
         }
     
         const [videos, setVideos] = useState([])
         const fetchVideoData = async () => {
-            const res = await fetch('http://localhost:8888/social_media/server/api/videos/read.php');
+            // const res = await fetch('http://localhost:8888/social_media/server/api/videos/read.php');
+            const res = await fetch(`${WEB_API}/api/videos/read.php`);
             const data = res.json();
             return data;
           }
-      
+
+        const [comments, setComments] = useState([])
+        const fetchCommentData = async () => {
+            const res = await fetch('http://localhost:8888/social_media/server/api/comments/read.php');
+            // const res = await fetch(`${WEB_API}/api/videos/read.php`);
+            const data = res.json();
+            return data;
+          }
     
       const onAddPost = async (e) => {
         e.preventDefault();
         // setUserId(from.id);
         let newPost = { user_id: user.user_id, user_name: user.user_name, title: title, post: post};
         try {
-          await fetch('http://localhost:8888/social_media/server/api/posts/create.php', {
+          // await fetch('http://localhost:8888/social_media/server/api/posts/create.php', {
+            await fetch(`${WEB_API}/api/posts/create.php`, {
               method: 'POST',
               headers: {
                   'Content-Type': 'application/json'
@@ -95,6 +130,7 @@ export const UserProvider = ({ children}) => {
               body: JSON.stringify(newPost)
           });
           nav(`/feed/`);
+          getPosts();
       } catch (err) {
           console.error('User could not be created');
       }
@@ -106,10 +142,7 @@ export const UserProvider = ({ children}) => {
       const userData = await fetchData();
       setUsers(userData.data);
     }
-    const getPosts = async () => {
-      const postData = await fetchPostData();
-      setPosts(postData.data);
-    }
+
     const getTracks = async () => {
       const trackData = await fetchTrackData();
       setTracks(trackData.data);
@@ -117,6 +150,15 @@ export const UserProvider = ({ children}) => {
     const getVideos = async () => {
       const videoData = await fetchVideoData();
       setVideos(videoData.data);
+    }
+    const getComments = async () => {
+      const commentData = await fetchCommentData();
+      setComments(commentData.data);
+    }
+
+    const getPosts = async () => {
+      const postData = await fetchPostData();
+      setPosts(postData.data);
     }
   
     useEffect(() => {
@@ -132,15 +174,21 @@ export const UserProvider = ({ children}) => {
         const trackData = await fetchTrackData();
         setTracks(trackData.data);
       }
+
+      const getComments = async () => {
+        const commentData = await fetchCommentData();
+        setComments(commentData.data);
+      }
   
       getUsers();
       getPosts();
       getTracks();
+      getComments();
 
       }, []);
     return (
         <UserContext.Provider value={{
-            width, users, onLogin, message, color, user, setColor, setEmail, email, setPassword, password, posts, setPosts, onAddPost, post, setPost, title, setTitle, tracks, setTracks, getUsers, getPosts, getTracks, setLoggedIn, videos, setVideos, getVideos
+            width, users, onLogin, message, color, user, setColor, setEmail, email, setPassword, password, posts, setPosts, onAddPost, post, setPost, title, setTitle, tracks, setTracks, getUsers, getPosts, getTracks, setLoggedIn, videos, setVideos, getVideos, comments, setComments, getComments, onLike
         }}>
             {children}
         </UserContext.Provider>

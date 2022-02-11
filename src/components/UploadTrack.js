@@ -1,13 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Form from 'react-bootstrap/Form';
+import {AudioPlayer} from '../components/AudioPlayer'
+import UserContext from "../context/UserContext";
 
 const UploadTrack = ({selectedTrack, setSelectedTrack, setTrack}) => {
-
+const {WEB_API} = useContext(UserContext);
   const onTrack = async (e) => {
     e.preventDefault()
     let data = {file_name: selectedTrack.name, status: 1 }
     try {
-    await fetch('http://localhost:8888/social_media/server/api/tracks/create.php', {
+    // await fetch('http://localhost:8888/social_media/server/api/tracks/create.php', {
+      await fetch(`${WEB_API}/api/tracks/create.php`, {
       method: 'POST',
       headers: {
 'Content-Type': 'multipart/form-data'
@@ -25,7 +28,7 @@ const UploadTrack = ({selectedTrack, setSelectedTrack, setTrack}) => {
        var xhttp = new XMLHttpRequest();
  
        // Set POST method and ajax file path
-       xhttp.open("POST", "http://localhost:8888/social_media/server/musicupload.php", true);
+       xhttp.open("POST", `http://localhost:8888/social_media/server/musicupload.php`, true);
       //  xhttp.setRequestHeader("Access-Control-Allow-Origin", "*")
        // call on request changes state
        xhttp.onreadystatechange = function() {
@@ -78,7 +81,9 @@ const UploadTrack = ({selectedTrack, setSelectedTrack, setTrack}) => {
       <h1>Upload Track</h1>
       {selectedTrack && (
         <div>
-        <img alt="not found" width={"250px"} src={URL.createObjectURL(selectedTrack)} />
+        {/* <img alt="not found" width={"250px"} src={} /> */}
+      <AudioPlayer fileName={URL.createObjectURL(selectedTrack)} trackName='' />
+
         <br />
         <button onClick={()=>setSelectedTrack(null)}>Remove</button>
         </div>
