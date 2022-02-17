@@ -28,6 +28,7 @@ const UploadVideo = ({selectedVideo, setSelectedVideo, setVideo}) => {
  
        // Set POST method and ajax file path
        xhttp.open("POST", "http://localhost:8888/social_media/server/videoupload.php", true);
+      //  xhttp.open("POST", "https://aubrey.digital/vms_server/server/videoupload.php", true);
       //  xhttp.open("POST", `${WEB_API}/videoupload.php`, true);
       //  xhttp.setRequestHeader("Access-Control-Allow-Origin", "*")
        // call on request changes state

@@ -2,8 +2,8 @@ import React, {useState, useEffect, useContext} from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import UserContext from '../context/UserContext';
 const AddPost = () => {
-    const {user, onAddPost, title, setTitle, post, setPost} = useContext(UserContext);
-
+    const {user, onAddPost, title, setTitle, post, setPost, setPostDate} = useContext(UserContext);
+    let date = new Date(Date.now())
  
     const nav = useNavigate();
 
@@ -11,6 +11,7 @@ const AddPost = () => {
   return <div className="frontPage"><h1>Add New Post</h1><br />
   <form onSubmit={onAddPost}>
   <label htmlFor="title">Title:</label><br />
+  {/* <input type="hidden" value={setPostDate}/> */}
   <input style={{borderRadius: '10px', height: '40px', textAlign: 'center'}} type="text" name="title" placeholder="Enter a subject" value={title} onChange={(e) => setTitle(e.target.value)}></input><br/><br />
   <label htmlFor="post">post:</label><br />
   <textarea style={{borderRadius: '10px',alignItems: 'center', justifyContent: 'center', textAlign: 'center'}} rows='15' cols='30' name="post" placeholder="Enter your message" value={post} onChange={(e) => setPost(e.target.value)}/><br/>

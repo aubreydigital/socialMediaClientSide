@@ -7,19 +7,19 @@ const UploadTrack = ({selectedTrack, setSelectedTrack, setTrack}) => {
 const {WEB_API} = useContext(UserContext);
   const onTrack = async (e) => {
     e.preventDefault()
-    let data = {file_name: selectedTrack.name, status: 1 }
-    try {
-    // await fetch('http://localhost:8888/social_media/server/api/tracks/create.php', {
-      await fetch(`${WEB_API}/api/tracks/create.php`, {
-      method: 'POST',
-      headers: {
-'Content-Type': 'multipart/form-data'
-      },
-      body: JSON.stringify(data)
-      });
-    } catch (err) {
-      console.log(e.target[0].files[0].name);
-    }
+//     let data = {file_name: selectedTrack.name, status: 1 }
+//     try {
+//     // await fetch('http://localhost:8888/social_media/server/api/tracks/create.php', {
+//       await fetch(`${WEB_API}/api/tracks/create.php`, {
+//       method: 'POST',
+//       headers: {
+// 'Content-Type': 'multipart/form-data'
+//       },
+//       body: JSON.stringify(data)
+//       });
+//     } catch (err) {
+//       console.log(e.target[0].files[0].name);
+//     }
         if (selectedTrack){
  
        var formData = new FormData();
@@ -29,6 +29,7 @@ const {WEB_API} = useContext(UserContext);
  
        // Set POST method and ajax file path
        xhttp.open("POST", `http://localhost:8888/social_media/server/musicupload.php`, true);
+      //  xhttp.open("POST", `https://aubrey.digital/vms_server/server/musicupload.php`, true);
       //  xhttp.setRequestHeader("Access-Control-Allow-Origin", "*")
        // call on request changes state
        xhttp.onreadystatechange = function() {
@@ -36,7 +37,7 @@ const {WEB_API} = useContext(UserContext);
  
             var response = this.responseText;
             if(response == 1){
-               alert("Upload successfully.");
+               alert("Upload successful.");
             }else{
                alert("File not uploaded.");
             }

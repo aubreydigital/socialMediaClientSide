@@ -32,22 +32,22 @@ const { users } = useContext(UserContext);
       <div className="bg-dark">
         <UserProvider>
       <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/users/:id" element={<Profile />} />
-      <Route path="/users/profile/:id" element={<PublicProfile />} />
-      <Route path="/users/:id/edit" element={<EditProfile />} />
-      <Route path="/posts/:id" element={<SinglePost />} />
-      <Route path='/posts' element={<Posts />} />
-      <Route path='/tracks' element={<Tracks />} />
-      <Route path='/videos' element={<Videos />} />
-      <Route path="/feed/" element={<Feed2 />} />
-      <Route path="register" element={<Register />} />
-      <Route path="login" element={<Login users={users} />} />
-      <Route path="/addTrack" element={<AddTrack />} />
-      <Route path="/addVideo" element={<AddVideo />} />
-      <Route path="/addPost/" element={<AddPost />} />
-      <Route path="/message" element={<Message />} />
-      <Route path="/upcomingShows/" element={<UpcomingShows />} />
+      <Route exact path="/" element={<Home />} />
+      <Route exact path="/users/:id" element={<Profile />} />
+      <Route exact path="/users/profile/:id" element={<PublicProfile />} />
+      <Route exact path="/users/:id/edit" element={<EditProfile />} />
+      <Route exact path="/posts/:id" element={<SinglePost />} />
+      <Route exact path='/posts' element={<Posts />} />
+      <Route exact path='/tracks' element={<Tracks />} />
+      <Route exact path='/videos' element={<Videos />} />
+      <Route exact path="/feed/" element={<Feed2 />} />
+      <Route exact path="register" element={<Register />} />
+      <Route exact path="login" element={<Login users={users} />} />
+      <Route exact path="/addTrack" element={<AddTrack />} />
+      <Route exact path="/addVideo" element={<AddVideo />} />
+      <Route exact path="/addPost/" element={<AddPost />} />
+      <Route exact path="/message" element={<Message />} />
+      <Route exact path="/upcomingShows/" element={<UpcomingShows />} />
       </Routes>
 
       </UserProvider>

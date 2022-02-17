@@ -17,12 +17,12 @@ const UserArea = ({currentPage}) => {
     <Navbar.Collapse id="basic-navbar-nav">
       <Nav className="ms-auto">
       {/* <Link to='/feed'>Feed</Link> */}
-        <Link to={`/users/${user.user_id}`}>Profile</Link>
-        <Link to={`/upcomingShows/`}>Upcoming Shows</Link>
-        <NavDropdown title="Add" id="nav-dropdown" className="dropdown-toggle nav-align">
-        <NavDropdown.Item><Link to={`/addPost/`}>Post</Link></NavDropdown.Item>
-        <NavDropdown.Item><Link to={`/addTrack/`}>Track</Link></NavDropdown.Item>
-        <NavDropdown.Item><Link to={`/addVideo/`}>Video</Link></NavDropdown.Item>
+        <Link className="mb-2" to={`/users/${user.user_id}`}>Profile</Link>
+        <Link className="mb-2" to={`/upcomingShows/`}>Upcoming Shows</Link>
+        <NavDropdown title="Add" id="nav-dropdown" className="dropdown-toggle nav-align mb-2">
+        <NavDropdown.Item style={{backgroundColor: '#111', paddingTop: '10px'}}><Link to={`/addPost/`}>Post</Link></NavDropdown.Item>
+        <NavDropdown.Item style={{backgroundColor: '#111'}}><Link to={`/addTrack/`}>Track</Link></NavDropdown.Item>
+        <NavDropdown.Item style={{backgroundColor: '#111'}}><Link to={`/addVideo/`}>Video</Link></NavDropdown.Item>
         </NavDropdown>
         
         <Link className="nav-align" onClick={clearUser} to={`/`}>Sign Out</Link>

@@ -16,18 +16,18 @@ export const UserProvider = ({ children}) => {
 //post state
     const [title, setTitle] = useState('')
     const [post, setPost] = useState('')
+    const [postDate, setPostDate] = useState('');
   //track state
   const [artistName, setArtistName] = useState('')
   const [trackName, setTrackName] = useState('')
   // const WEB_API = 'https://aubrey.digital/vms_server/server';
-  const WEB_API = 'http://localhost:8888/social_media/server';
+  // const WEB_API = 'http://localhost:8888/social_media/server';
     const { width } = useWindowSize();
 
     let nav = useNavigate();
     const fetchData = async () => {
-      // const res = await fetch('http://localhost:8888/social_media/server/api/users/');
-      // const res = await fetch(`${LOCAL_API}/api/users/`);
-      const res = await fetch(`${WEB_API}/api/users/`);
+      const res = await fetch('http://localhost:8888/social_media/server/api/users/');
+      // const res = await fetch('https://aubrey.digital/vms_server/server/api/users/');
       const data = res.json();
       return data;
     }
@@ -38,6 +38,7 @@ export const UserProvider = ({ children}) => {
       console.log(updatedUser);
       try {
           await fetch('http://localhost:8888/social_media/server/api/posts/update.php', {
+            // await fetch('https://aubrey.digital/vms_server/server/api/posts/update.php', {
               method: 'PUT',
               headers: {
                   'Content-Type': 'application/json'
@@ -57,7 +58,7 @@ export const UserProvider = ({ children}) => {
         let loginUser = { user_email: email, user_password: password };
         try {
             await fetch('http://localhost:8888/social_media/server/api/users/login.php', {
-            // await fetch(`${WEB_API}/api/users/login.php`, {
+              // await fetch('https://aubrey.digital/vms_server/server/api/users/login.php', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -70,7 +71,7 @@ export const UserProvider = ({ children}) => {
               setMessage('Successful login!');
               setUser(user);
               setLoggedIn(true);
-                nav(`/feed/`)
+                  nav(`/feed/`);
               } else {
               setColor('red');
               setMessage('Incorrect username or password');
@@ -86,24 +87,24 @@ export const UserProvider = ({ children}) => {
 
       const [posts, setPosts] = useState([])
     const fetchPostData = async () => {
-        // const res = await fetch('http://localhost:8888/social_media/server/api/posts/read.php');
-        const res = await fetch(`${WEB_API}/api/posts/read.php`);
+        const res = await fetch('http://localhost:8888/social_media/server/api/posts/read.php');
+        // const res = await fetch('https://aubrey.digital/vms_server/server/api/posts/read.php');
         const data = res.json();
         return data;
       }
 
       const [tracks, setTracks] = useState([])
       const fetchTrackData = async () => {
-          // const res = await fetch('http://localhost:8888/social_media/server/api/tracks/read.php');
-          const res = await fetch(`${WEB_API}/api/tracks/read.php`);
+          const res = await fetch('http://localhost:8888/social_media/server/api/tracks/read.php');
+          // const res = await fetch('https://aubrey.digital/vms_server/server/api/tracks/read.php');
           const data = res.json();
           return data;
         }
     
         const [videos, setVideos] = useState([])
         const fetchVideoData = async () => {
-            // const res = await fetch('http://localhost:8888/social_media/server/api/videos/read.php');
-            const res = await fetch(`${WEB_API}/api/videos/read.php`);
+            const res = await fetch('http://localhost:8888/social_media/server/api/videos/read.php');
+            // const res = await fetch('https://aubrey.digital/vms_server/server/api/videos/read.php');
             const data = res.json();
             return data;
           }
@@ -111,7 +112,7 @@ export const UserProvider = ({ children}) => {
         const [comments, setComments] = useState([])
         const fetchCommentData = async () => {
             const res = await fetch('http://localhost:8888/social_media/server/api/comments/read.php');
-            // const res = await fetch(`${WEB_API}/api/videos/read.php`);
+            // const res = await fetch('https://aubrey.digital/vms_server/server/api/comments/read.php');
             const data = res.json();
             return data;
           }
@@ -119,10 +120,12 @@ export const UserProvider = ({ children}) => {
       const onAddPost = async (e) => {
         e.preventDefault();
         // setUserId(from.id);
-        let newPost = { user_id: user.user_id, user_name: user.user_name, title: title, post: post};
+        
+        console.log(postDate)
+        let newPost = { user_id: user.user_id, user_name: user.user_name, title: title, post: post, created_at: postDate};
         try {
-          // await fetch('http://localhost:8888/social_media/server/api/posts/create.php', {
-            await fetch(`${WEB_API}/api/posts/create.php`, {
+          await fetch('http://localhost:8888/social_media/server/api/posts/create.php', {
+            // await fetch('https://aubrey.digital/vms_server/server/api/posts/create.php', {
               method: 'POST',
               headers: {
                   'Content-Type': 'application/json'

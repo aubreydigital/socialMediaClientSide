@@ -12,6 +12,7 @@ const RegisterForm = () => {
         console.log(newUser);
         try {
             await fetch('http://localhost:8888/social_media/server/api/users/register.php', {
+                // await fetch('https://aubrey.digital/vms_server/server/api/users/register.php', {
                 method: 'POST',
                 mode: 'no-cors',
                 headers: {

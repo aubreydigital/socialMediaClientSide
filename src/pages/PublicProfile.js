@@ -20,6 +20,7 @@ const PublicProfile = () => {
     useEffect(() => {
     const fetchData = async () => {
       const res = await fetch(`http://localhost:8888/social_media/server/api/users/single.php?user_id=${params.id}`);
+      // const res = await fetch(`https://aubrey.digital/vms_server/server/api/users/single.php?user_id=${params.id}`);
       const data = res.json();
       return data;
     }

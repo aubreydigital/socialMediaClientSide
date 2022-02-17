@@ -55,7 +55,7 @@ let noMoError = currentTime
 
   return (
     <div className="d-flex flex-column justify-content-center align-items-center text-center">
-      <video style={{maxHeight: '300px', marginBottom: '10px', borderRadius: '10px'}} ref={audioPlayer} src={song} preload="auto"></video>
+      <video style={{maxHeight: '300px', marginBottom: '10px', borderRadius: '10px', boxShadow: '0 0 10px #fff'}} ref={audioPlayer} src={song} preload="auto"></video>
       {/* <button  onClick={backThirty}><BsArrowLeftShort /> 30</button> */}
       <h5 className="p-3" style={{ color: 'rgba(255, 255, 255, 1)', width: "300px", borderRadius: '6px', backgroundColor: 'rgba(255,255,255, .2)', fontFamily: 'sans-serif'}}>{songText}<br/><span style={{color: 'darkcyan'}}>{artistName}</span></h5>
       <button style={{ color: 'rgba(0,0,0, .9)', borderRadius: '6px', backgroundColor: 'rgba(255,255,255, .4)',  fontFamily: 'sans-serif', fontSize: '.5em', height: '50px', width: '50px' }} onClick={togglePlayPause} >

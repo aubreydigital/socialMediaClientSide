@@ -15,10 +15,11 @@ const AddVideo = () => {
   const onSubmit = async (e) => {
       e.preventDefault();
       let newVideo = { artist_name: user.artist_name, video_name: videoName, file_name: `http://localhost:8888/social_media/server/uploads/${video}`}
+      // let newVideo = { artist_name: user.artist_name, video_name: videoName, file_name: `https://aubrey.digital/vms_server/server/uploads/${video}`}
         console.log(newVideo);
         try {
           await fetch('http://localhost:8888/social_media/server/api/videos/create.php', {
-            // await fetch(`${WEB_API}/api/videos/create.php`, {
+            // await fetch('https://aubrey.digital/vms_server/server/api/videos/create.php', {
           method: 'POST',
           mode: 'no-cors',
           headers: {

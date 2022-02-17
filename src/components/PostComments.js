@@ -5,6 +5,7 @@ const PostComments = ({post_id}) => {
   const {params} = useParams;
   const fetchCommentData = async () => {
       const res = await fetch(`http://localhost:8888/social_media/server/api/comments/read.php`);
+      // const res = await fetch(`https://aubrey.digital/vms_server/server/api/comments/read.php`);
       const data = res.json();
       return data;
     }

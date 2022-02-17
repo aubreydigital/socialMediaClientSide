@@ -1,4 +1,5 @@
 import React, { useContext, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import UserArea from '../components/UserArea';
 import Footer from '../components/Footer';
 import { Container, Row, Col } from 'react-bootstrap';
@@ -6,25 +7,36 @@ import PostsArea from '../components/PostsArea';
 import TracksArea from '../components/TracksArea';
 import UserContext from '../context/UserContext';
 import VideosArea from '../components/VideosArea';
+import NextShow from '../components/NextShow';
 const Feed2 = () => {
-  const {user, getPosts, getTracks, getVideos} = useContext(UserContext);
-
+  const {user, getPosts, getTracks, getVideos, loggedIn} = useContext(UserContext);
+const nav = useNavigate();
   useEffect(() => {
     getPosts();
     getTracks();
     getVideos();
   }, [])
-  
   return (
     <>
     <UserArea currentPage="feed" />
-  <Container className="px-4" fluid>
+  <Container fluid>
 
 {/* <UserArea /> */}
-<VideosArea />
 <Row className='flex-row'>
+<Col lg={6} className="mt-5">
+<NextShow />
+</Col>
+<Col lg={6} className="mt-5">
+<PostsArea howMany="top"/>
+</Col>
+</Row>
+<Row className='flex-row'>
+<Col lg={6}>
 <TracksArea />
-    <PostsArea howMany="top"/>
+</Col>
+<Col lg={6}>
+<VideosArea />
+</Col>
 </Row>
   </Container>
   <Footer currentPage="feed"/>
@@ -32,5 +44,4 @@ const Feed2 = () => {
   </>
   );
 };
-
 export default Feed2;

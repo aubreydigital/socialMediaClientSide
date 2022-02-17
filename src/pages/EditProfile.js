@@ -1,7 +1,10 @@
 import { useState, useEffect } from 'react';
+import UploadImage from '../components/UploadImage'
 import {useNavigate, useParams, Link} from 'react-router-dom';
 const EditProfile = () => {
     const [userName, setUserName] = useState('');
+    const [profilePic, setProfilePic] = useState('http://localhost:8888/social_media/server/uploads/profile/default.jpeg');
+    // const [profilePic, setProfilePic] = useState('https://aubrey.digital/vms_server/server/uploads/profile/default.jpeg');
     const [preferred, setPreferred] = useState('');
     const [pronouns, setPronouns] = useState('');
     const [artistName, setArtistName] = useState('');
@@ -18,6 +21,7 @@ const EditProfile = () => {
     useEffect(() => {
         const fetchData = async () => {
           const res = await fetch(`http://localhost:8888/social_media/server/api/users/single.php?user_id=${params.id}`);
+        //   const res = await fetch(`https://aubrey.digital/vms_server/server/api/users/single.php?user_id=${params.id}`);
           const data = res.json();
           return data;
         }
@@ -43,10 +47,11 @@ let nav = useNavigate();
 
 const onSubmit = async (e) => {
     e.preventDefault();
-    let updatedUser = { user_name: userName, full_name: preferred, pronouns: pronouns, artist_name: artistName,  user_email: userEmail, phone_number: phoneNumber, website: website, twitter: twitter, twitch: twitch, soundcloud: soundcloud, instagram: instagram, user_password: userPassword, user_id: params.id };
+    let updatedUser = { user_name: userName, profile_pic: profilePic, full_name: preferred, pronouns: pronouns, artist_name: artistName,  user_email: userEmail, phone_number: phoneNumber, website: website, twitter: twitter, twitch: twitch, soundcloud: soundcloud, instagram: instagram, user_password: userPassword, user_id: params.id };
     console.log(updatedUser);
     try {
         await fetch('http://localhost:8888/social_media/server/api/users/update.php', {
+            // await fetch('https://aubrey.digital/vms_server/server/api/users/update.php', {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
@@ -61,6 +66,7 @@ const onSubmit = async (e) => {
 };
 
 return <div style={{textAlign: 'center'}}><h1 style={{paddingTop: '1em'}}>Edit Profile</h1><form onSubmit={onSubmit}>
+<UploadImage/>
 <label htmlFor="user_name">Username:</label><br/>
 <input type="text" name="user_name" placeholder="Enter a username..." value={userName || ''} onChange={(e) => setUserName(e.target.value)}></input><br />
 <label htmlFor="full_name">Preferred Name:</label><br/>
